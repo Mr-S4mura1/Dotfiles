@@ -1,3 +1,5 @@
+# Entorno Kali Linux
+
 - Este es mi entorno que ultilizo dia a dia para programar, es un entorno basado en linux, que usa BSPWM y SXHKD, esto como gestor de ventanas, entre otras muchas funcionalidades que e agregado en el dia a dia.
 
 ![fondo](https://github.com/Mr-S4mura1/Dotfiles/assets/113269686/f9295f6b-41f0-4b72-b46c-a67dc792c71a)
@@ -8,6 +10,28 @@
 
 ![Escritorio3](https://github.com/Mr-S4mura1/Dotfiles/assets/113269686/a3b65a7f-6f63-4493-96a5-d6a86ffa9b9e)
 
+ **Este entorno usa:**
+- Bspwm
+- Sxhkd
+- Kitty
+- Nvchad
+- Rofi
+  
+# Instalacion Entorno
+- Primero Clonamos el repositorio
+  ```sh
+  git clone https://github.com/Mr-S4mura1/Dotfiles
+  ```
+- Instalamos los paquetes necesarios:
+  ```py
+  pip3 install -r requirements.txt
+  ```
+- Ejecutamos el Script como usuario Root:
+  ```py
+  python3 bspwm_install.py
+  ```
 
+  ### Creado por Mr-S4mura1
+  
 
 
