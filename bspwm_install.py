@@ -26,12 +26,12 @@ print(Fore.BLUE + " - Github: https://github.com/Mr-S4mura1")
 # ----------------------------------------------------------------
 
 def check_root():
-    if os.geteuid() == 0:
+    if os.geteuid() == 1000:
         print("")
-        print(Fore.RED + " - Eres usuario root.")
+        print(Fore.RED + " - Eres usuario normal.")
     else:
         print("")
-        print(Fore.RED + " - Requires ser usuario Root!")
+        print(Fore.RED + " - No puedes ser usuario Root!")
         sys.exit()
 check_root()
             
@@ -55,7 +55,7 @@ except subprocess.CalledProcessError as e:
 #---------------------------------------------------------------
 # Instalacion paquetes bspwm sxhkd
 #---------------------------------------------------------------
-bspwm_install = "sudo apt-get install bspwm sxhkd build-essential git vim libxcb-util0-dev libxcb-ewmh-dev libxcb-randr0-dev libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-xinerama0-dev libasound2-dev libxcb-xtest0-dev libxcb-shape0-dev thunar cmake cmake-data pkg-config python3-sphinx libcairo2-dev libxcb1-dev libxcb-util0-dev libxcb-randr0-dev libxcb-composite0-dev python3-xcbgen xcb-proto libxcb-image0-dev libxcb-ewmh-dev libxcb-icccm4-dev libxcb-xkb-dev libxcb-xrm-dev libxcb-cursor-dev libasound2-dev libpulse-dev libjsoncpp-dev libmpdclient-dev libcurl4-openssl-dev libnl-genl-3-dev polybar rofi calc network-manager picom kali-screensaver hollywood-activate xss-lock meson libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev libxcb-glx0-dev feh wget pulseaudio pulseaudio alsa-utils pamixer brightnessctl i3lock-color"
+bspwm_install = "sudo apt-get install bspwm sxhkd build-essential git vim libxcb-util0-dev libxcb-ewmh-dev libxcb-randr0-dev libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-xinerama0-dev libasound2-dev libxcb-xtest0-dev libxcb-shape0-dev thunar cmake cmake-data pkg-config python3-sphinx libcairo2-dev libxcb1-dev libxcb-util0-dev libxcb-randr0-dev libxcb-composite0-dev python3-xcbgen xcb-proto libxcb-image0-dev libxcb-ewmh-dev libxcb-icccm4-dev libxcb-xkb-dev libxcb-xrm-dev libxcb-cursor-dev libasound2-dev libpulse-dev libjsoncpp-dev libmpdclient-dev libcurl4-openssl-dev libnl-genl-3-dev polybar rofi calc network-manager picom kali-screensaver hollywood-activate xss-lock meson libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev libxcb-glx0-dev feh wget pulseaudio pulseaudio alsa-utils pamixer brightnessctl i3lock-color -y"
 
 print(Fore.BLUE + " - Instalando paquetes necesarios!")
 try:
@@ -109,7 +109,8 @@ try:
     subprocess.run("bash setup.sh", shell=True, text=True, capture_output=True)
     print(Fore.BLUE + " - Rofi clonado correctamente!")
     print(Fore.BLUE + " - Creando carpetas para rofi")
-    subprocess.run("rm -rf ~/.config/rofi/*", shell=True, text=True, capture_output=True)
+    subprocess.run("rm -rf ~/.config/rofi", shell=True, text=True, capture_output=True)
+    subprocess.run("mkdir -p ~/.config/rofi", shell=True, text=True, capture_output=True)
     subprocess.run("cp -r ./rofi/* ~/.config/rofi", shell=True, text=True, capture_output=True)
     print(Fore.BLUE + " - Carpetas rofi configuradas correctamente!")
 except subprocess.CalledProcessError as e:
@@ -178,6 +179,7 @@ except subprocess.CalledProcessError as e:
 
 #------------------------------------------------------------
 # Configurando capeta Pictures------------------------------
+# -----------------------------------------------------------
 
 print(Fore.BLUE + " - Configurando carpeta Pictures")
 try:
@@ -188,11 +190,36 @@ except subprocess.CalledProcessError as e:
     print(e.stdout)
     print(e.stderr)
 
-reboot = input(Fore.GREEN + " - Se ha configurado Correctamente el Entorno ¿Desea reiniciar?")
-if reboot == "yes" or reboot == "y":
-    print(Fore.BLUE + " - Gracias por instalar mi entorno!")
-    subprocess.run("reboot", shell=True, text=True, capture_output=True)
 
+#---------------------------------------------------------
+#- Comprobar Instalaciones
+# -------------------------------------------------------
+
+comprobar = "sudo apt-get install rofi kitty nvim thunar calc network-manager xss-lock -y"
+print("")
+print(Fore.BLUE + " - Comprobando Instalaciones necesarias!")
+try:
+    subprocess.run(comprobar, shell=True, text=True, capture_output=True)
+    print(Fore.BLUE + " - Todos los paquetes han sido instalados correctamente!")
+except subprocess.CalledProcessError as e:
+    print(Fore.RED + " - Error al comprobar instalaciones!")
+    print(e.stdout)
+    print(e.stderr)
+
+#---------------------------------------------------------
+# Reiniciar Computador
+#--------------------------------------------------------
+
+reboot = input(Fore.GREEN + " - Se ha configurado Correctamente el Entorno ¿Desea reiniciar? [yes/y] or [not/n]: ")
+if reboot == "yes" or reboot == "y":
+    print("")
+    print(Fore.BLUE + " - Gracias por instalar el entorno de Mr-S4mura1")
+    subprocess.run("reboot", shell=True, text=True, capture_output=True)
+elif reboot == "not" or reboot == "n":
+    print("")
+    print(Fore.BLUE + " - Gracias por instalar el entorno de Mr-S4mura1")
+    sys.exit()
 else: 
-    print(Fore.BLUE + " - Gracias por instalar mi entorno")
+    print("")
+    print(Fore.BLUE + " - Has ingresado un valor no valido!, recuerda reinicar el computador para ver los cambios")
     sys.exit()
