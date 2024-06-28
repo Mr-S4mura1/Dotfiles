@@ -17,7 +17,7 @@ bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=offi
 bspc config focus_follows_pointer true
-feh --bg-fill /home/david/Pictures/fondo.jpg
+feh --bg-fill /home/${USER}/Pictures/fondo.jpg
 xsetroot -cursor_name left_ptr &
 bash ~/.config/polybar/launch.sh --cuts
 pkill picom
