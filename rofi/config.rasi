@@ -179,5 +179,5 @@ configuration {
 	me-accept-custom: "Control+MouseDPrimary";
 */
 }
-//@theme "/home/david/.config/rofi/themes/squared-material-red.rasi"
-@theme "/home/david/.config/rofi/themes/launcher.rasi"
+//@theme "/home/${USER}/.config/rofi/themes/squared-material-red.rasi"
+@theme "/home/${USER}/.config/rofi/themes/launcher.rasi"
